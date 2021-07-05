@@ -1,27 +1,21 @@
 import React, { FC } from "react";
-import { Cell } from "./Cell"
+import Cell from "./Cell";
 
-export interface Props {
-  xCount: number
-  yCount: number
-  clickMe: (x: number, y: number) => void
-}
-
-const tt = (y:number, xCount: number, clickMe: (x: number, y: number) => void) => {
+const row = (y:number, xCount: number, clickMe: (x: number, y: number) => void) => {
   let x: number = 0;
-  const row = [];
+  const mas_row = [];
   while (x < xCount) { 
-    row.push(<Cell key={`${x}_${y}`} x={x} y={y} clickMe={clickMe}>{`${x}_${y}`}</Cell>);
+    mas_row.push(<Cell width={40} height={40} key={`${x}_${y}`} x={x} y={y} clickMe={clickMe}>{`${x}_${y}`}</Cell>);
     x++; 
   }
-  return row;
+  return mas_row;
 }
 
-export const CellField: FC<Props> = ({ xCount, yCount, clickMe }) => {
+const CellField: FC<CellFieldProps> = ({ xCount, yCount, clickMe }) => {
   const filed = []
   let y: number = 0;
   while(y < yCount) {
-    filed.push(tt(y,xCount,clickMe));
+    filed.push(row(y, xCount, clickMe));
     filed.push(<br key={`${y}`}/>);
     y++;
   }
@@ -31,3 +25,5 @@ export const CellField: FC<Props> = ({ xCount, yCount, clickMe }) => {
   </>
   )
 };
+
+export default CellField;
